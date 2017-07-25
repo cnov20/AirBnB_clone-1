@@ -143,7 +143,8 @@ class HBNBCommand(cmd.Cmd):
                 new_val = new_val.replace('_', ' ')
 
             new_dict[key] = new_val
-            print(new_dict)
+"""            print(new_dict)
+"""
 
     def do_show(self, arg):
         """show: show [ARG] [ARG1]
