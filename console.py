@@ -136,16 +136,15 @@ class HBNBCommand(cmd.Cmd):
         """
 
         for key, value in new_dict.items():
+            new_val = value
             if value.startswith('"') and value.endswith('"'):
                 new_val = value[1:-1]
-            if '_' in new_val:
+            if '_' in value:
                 new_val = new_val.replace('_', ' ')
 
             new_dict[key] = new_val
+            print(new_dict)
 
-"""        print(new_val)
-        print(new_dict)
-"""
     def do_show(self, arg):
         """show: show [ARG] [ARG1]
         ARG = Class
