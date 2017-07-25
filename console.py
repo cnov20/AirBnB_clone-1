@@ -144,6 +144,8 @@ class HBNBCommand(cmd.Cmd):
 
             new_dict[key] = new_val
 
+        my_obj.__dict__.update(new_dict)
+
     def do_show(self, arg):
         """show: show [ARG] [ARG1]
         ARG = Class
@@ -220,7 +222,7 @@ class HBNBCommand(cmd.Cmd):
         return s
 
     def __check_dict(self, arg):
-        """checks if the arguments input has a dictionary"""
+        """checks if the each input argument has a dictionary"""
         if '{' and '}' in arg:
             l = arg.split('{')[1]
             l = l.split(', ')
