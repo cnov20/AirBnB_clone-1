@@ -2,4 +2,4 @@
 -- Sets usage and permissions for database and user
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
-GRANT ALL ON *.* TO hbnb_dev_db;
+GRANT ALL ON *.* TO 'hbnb_dev'@'localhost';
