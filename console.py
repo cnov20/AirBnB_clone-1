@@ -143,9 +143,9 @@ class HBNBCommand(cmd.Cmd):
 
             new_dict[key] = new_val
 
-        print(new_val)
+"""        print(new_val)
         print(new_dict)
-
+"""
     def do_show(self, arg):
         """show: show [ARG] [ARG1]
         ARG = Class
