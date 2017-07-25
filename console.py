@@ -97,6 +97,13 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
+
+    def dict_create(self, d, arg):
+        """ Builds a dictionary from arguments passed by converting
+            them to key value pairs
+        """
+        pass
+
     def do_create(self, arg):
         """create: create [ARG]
         ARG = Class Name
@@ -112,6 +119,32 @@ class HBNBCommand(cmd.Cmd):
                     my_obj = v()
                     my_obj.save()
                     print(my_obj.id)
+
+        """ Go through command line arguments and
+            separate each key value pair - store in new dictionary
+        """
+        new_dict = {}
+        for s in arg:
+            if '=' in s:
+                index = s.index('=')
+                key = s[:index]
+                value = s[index+1:]
+                new_dict[key] = value
+
+        """ Iterate through newly created dictionary and
+        do string formatting
+        """
+
+        for key, value in new_dict.items():
+            if value.startswith('"') and value.endswith('"'):
+                new_val = value[1:-1]
+            if '_' in new_val:
+                new_val = new_val.replace('_', ' ')
+
+            new_dict[key] = new_val
+
+        print(new_val)
+        print(new_dict)
 
     def do_show(self, arg):
         """show: show [ARG] [ARG1]
