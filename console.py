@@ -145,6 +145,7 @@ class HBNBCommand(cmd.Cmd):
             new_dict[key] = new_val
 
         my_obj.__dict__.update(new_dict)
+        my_obj.save()
 
     def do_show(self, arg):
         """show: show [ARG] [ARG1]
