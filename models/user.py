@@ -3,8 +3,8 @@
 User Class from Models Module
 """
 
-from models.base_model import BaseModel, Base, getenv
-
+from models.base_model import BaseModel, Base, Column, String, getenv
+from sqlalchemy.orm import relationship
 
 class User(BaseModel):
     """User class handles all application users"""

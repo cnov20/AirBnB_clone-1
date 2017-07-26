@@ -21,7 +21,7 @@ class Place(BaseModel):
         __tablename__="places"
 
         city_id = Column(String(60),
-                     ForeignKeY("users.id"),
+                     ForeignKey("cities.id"),
                      nullable=False)
         user_id = Column(String(60),
                      ForeignKey("users.id"),
@@ -50,7 +50,7 @@ class Place(BaseModel):
         amenities = relationship("Amenity", secondary="place_amenity",
                              backref="places")
 
-        reviews = relationship("Review", back_ref="place")
+        reviews = relationship("Review", backref="place", cascade="delete")
 
     else:
         city_id = ""
