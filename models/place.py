@@ -15,7 +15,7 @@ class PlaceAmenity(Base):
     place_id = Column(String(60), ForeignKey('places.id'), primary_key=True, nullable=False)
     amenity_id = Column(String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False)
 
-class Place(BaseModel, Base):
+class Place(BaseModel):
     """Place class handles all application places"""
     if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__="places"

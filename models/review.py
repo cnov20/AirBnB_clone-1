@@ -6,7 +6,7 @@ Review Class from Models Module
 from models.base_model import BaseModel, Base, Column, String, ForeignKey, getenv
 
 
-class Review(BaseModel, Base):
+class Review(BaseModel):
     """Review class handles all application reviews"""
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':

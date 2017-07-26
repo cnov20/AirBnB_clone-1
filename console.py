@@ -117,8 +117,8 @@ class HBNBCommand(cmd.Cmd):
             for k, v in CNC.items():
                 if k == arg[0]:
                     my_obj = v()
-                    """  my_obj.save() """
-                    """  print(my_obj.id) """
+                    """ my_obj.save() """
+                    """ print(my_obj.id) """
 
         """ Go through command line arguments and
             separate each key value pair - store in new dictionary

@@ -9,7 +9,7 @@ from sqlalchemy import ForeignKey
 from os import getenv
 
 
-class City(BaseModel, Base):
+class City(BaseModel):
     """City class handles all application cities"""
     if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = "cities"
