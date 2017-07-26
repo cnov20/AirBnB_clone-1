@@ -2,46 +2,56 @@
 """
 Place Class from Models Module
 """
-import model
-from models.base_model import BaseModel
+
+from models.base_model import BaseModel, Base
 from os import getenv
-from sqlalchemy import ForeignKey, Float, String, Integer
+from sqlalchemy import ForeignKey, Float, String, Column, Integer
 from sqlalchemy.orm import relationship, backref
 
-class Place(BaseModel, Base):
+
+class PlaceAmenity():
+    __tablename__ = 'place_amenity'
+    metadata = Base.metadata
+    place_id = Column(String(60), ForeignKey('places.id'), primary_key=True, nullable=False)
+    amenity_id = Column(String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False)
+
+class Place(BaseModel):
     """Place class handles all application places"""
     if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__="places"
 
-    city_id = Column(String(60),
-                     ForeignKeY("users.id")
+        city_id = Column(String(60),
+                     ForeignKeY("users.id"),
                      nullable=False)
-    user_id = Column(String(60),
-                     ForeignKey("users.id")
+        user_id = Column(String(60),
+                     ForeignKey("users.id"),
                      nullable=False)
-    name = Column(String(60),
+        name = Column(String(60),
                   nullable=False)
-    description = Column(String(1024),
+        description = Column(String(1024),
                          nullable=False)
-    number_rooms = Column(Integer,
+        number_rooms = Column(Integer,
                           nullable=False,
                           default=0)
-    number_bathrooms = Column(Integer,
+        number_bathrooms = Column(Integer,
                               default=0,
                               nullable=False)
-    max_guest = Column(Integer,
+        max_guest = Column(Integer,
                        default=0,
                        nullable=False)
-    price_by_night = Column(Integer,
+        price_by_night = Column(Integer,
                             default=0,
                             nullable=False)
-    latitude = Column(Float,
+        latitude = Column(Float,
                       nullable=True)
 
-    longitude = Column(Float,
+        longitude = Column(Float,
                        nullable=True)
-    amenities = relationship("Amenity", secondary="place_amenity",
+        amenities = relationship("Amenity", secondary="place_amenity",
                              backref="places")
+
+        reviews = relationship("Review", back_ref="place")
+
     else:
         city_id = ""
         user_id = ""
@@ -60,7 +70,7 @@ class Place(BaseModel, Base):
         """instantiates a new place"""
         super().__init__(self, *args, **kwargs)
 
-    if getenv("HBNB_TYPE_STORAGE", ) != "db":
+"""    if getenv("HBNB_TYPE_STORAGE", ) != "db":
         @property
         def reviews(self):
             all_reviews = models.storge.all("Review").values()
@@ -76,3 +86,4 @@ class Place(BaseModel, Base):
                 if n is not None:
                     end.append(n)
             return end
+"""
