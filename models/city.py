@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """
 City Class from Models Module
@@ -10,7 +9,7 @@ from sqlalchemy import ForeignKey
 from os import getenv
 
 
-class City(BaseModel):
+class City(BaseModel, Base):
     """City class handles all application cities"""
     if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = "cities"

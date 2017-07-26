@@ -6,7 +6,7 @@ User Class from Models Module
 from models.base_model import BaseModel, Base, Column, String, getenv
 from sqlalchemy.orm import relationship
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """User class handles all application users"""
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':

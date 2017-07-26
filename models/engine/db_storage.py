@@ -1,16 +1,15 @@
 #!/usr/bin/python3
+
 """
 Handles I/O, writing and reading, of JSON for storage of all class instances
 """
-import json
+
+from models.base_model import BaseModel, Base
 from models import base_model, amenity, city, place, review, state, user
 from os import getenv
-from sqlalchemy import (create_engine, func)
-from sqlalchemy.orm import (scoped_session, sessionmaker)
-from datetime import datetime
+from sqlalchemy import create_engine, func
+from sqlalchemy.orm import scoped_session, sessionmaker
 
-strptime = datetime.strptime
-to_json = base_model.BaseModel.to_json
 
 class DBStorage:
     __engine =  None
@@ -27,11 +26,11 @@ class DBStorage:
                                    "Place": Place, "Review": Review,
                                    "State": State}
         if getenv("HBNB_MYSQL_ENV") == "test":
-            Base.metadata.drop(self.__engine)
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         obj_orm = {}
-        if cls in self.__models:
+        if cls in self.__models_available:
             for s in self.__session.query(
                     self.__models.get(cls)):
                 obj_orm[s.__dict__["id"]] = s
