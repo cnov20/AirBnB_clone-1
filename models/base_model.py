@@ -7,8 +7,10 @@ import json
 import models
 from uuid import uuid4, UUID
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Datetime, ForeignKey
+from os import environ, getenv
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Table
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 now = datetime.now
 strptime = datetime.strptime
@@ -17,8 +19,8 @@ Base = declarative_base()
 class BaseModel:
     """attributes and functions for BaseModel class"""
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
-    created_at = Column(Datetime, nullable=False, default=datetime.utcnow())
-    updated_at = Column(Datetime, nullable=False, default=datetime.utcnow())
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
 
     def __init__(self, *args, **kwargs):
@@ -74,6 +76,8 @@ class BaseModel:
             else:
                 bm_dict[k] = str(v)
         bm_dict["__class__"] = type(self).__name__
+        if '_sa_instance_state' in bm_dict:
+            del bm_dict['_sa_instance_state']
         return(bm_dict)
 
     def __str__(self):
