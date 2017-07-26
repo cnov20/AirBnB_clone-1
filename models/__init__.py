@@ -11,9 +11,9 @@ from os import getenv
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     from models.engine import db_storage
     storage = db_storage.DBStorage()
-
 else:
     storage = file_storage.FileStorage()
+
 storage.reload()
 
 """CNC - dictionary = { Class Name (string) : Class Type }"""
