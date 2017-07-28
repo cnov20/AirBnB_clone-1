@@ -12,10 +12,8 @@ def do_pack():
     time_created = datetime.utcnow().strftime("%Y%m%d%H%M%S")
     local('mkdir -p versions')
     archive = local('tar -cvzf versions/web_static_20170314233357.tgz web_static')
-    print(time_created)
-
 
     if archive is not None:
-        return archive
+        return ('versions/web_static.{}'.format(time_created))
     else:
         return None
