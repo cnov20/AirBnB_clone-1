@@ -8,7 +8,9 @@ from time import strftime
 
 
 def do_pack():
+
     ''' Method archives files and returns path of archive '''
+
     time_created = datetime.utcnow().strftime("%Y%m%d%H%M%S")
     directory_created = local('mkdir -p versions')
     archive = local('tar -cvzf versions/web_static_{}.tgz web_static'
@@ -19,7 +21,11 @@ def do_pack():
     else:
         return None
 
+
 def do_deploy(archive_path):
+
+    '''Method deploys an archive to a web server
+    and uncomporesses it to a folder '''
 
     archive_path = 'versions/web_static.{}.tgz'
 
