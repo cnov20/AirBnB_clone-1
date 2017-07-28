@@ -2,6 +2,7 @@
 # This script configures servers to deploy static content on the web
 sudo apt-get update
 sudo apt-get install -y nginx
+sudo service nginx start
 sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test
 echo -e '<html>
