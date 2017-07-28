@@ -6,6 +6,7 @@ from fabric.api import *
 from datetime import datetime
 from time import strftime
 
+
 def do_pack():
     ''' Method archives files and returns path of archive '''
     time_created = datetime.utcnow().strftime("%Y%m%d%H%M%S")
