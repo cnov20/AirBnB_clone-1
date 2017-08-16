@@ -8,8 +8,7 @@ from sqlalchemy.orm import relationship, backref
 from os import getenv
 
 
-
-class Amenity(BaseModel, Base):
+class Amenity(BaseModel):
     """Amenity class handles all application amenities"""
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
