@@ -26,7 +26,7 @@ class DBStorage:
                                    "Amenity": Amenity, "City": City,
                                    "Place": Place, "Review": Review,
                                    "State": State}
-         if getenv("HBNB_MYSQL_ENV") == "test":
+        if getenv("HBNB_MYSQL_ENV") == "test":
             Base.metadata.drop(self.__engine)
 
     def all(self, cls=None):
