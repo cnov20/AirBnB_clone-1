@@ -9,7 +9,9 @@ sudo service nginx start
 
 sudo mkdir -p /data/web_static/releases/test
 
-echo "<!DOCTYPE html><html><head></head><body>test html</body></html>" > /data/web_static/releases_test/index.html
+sudo mkdir -p /data/web_static/releases/shared
+
+echo "<!DOCTYPE html><html><head></head><body> Holberton School html</body></html>" > /data/web_static/releases_test/index.html
 
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
