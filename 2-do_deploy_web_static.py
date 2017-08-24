@@ -5,8 +5,9 @@
 from fabric.api import *
 from datetime import datetime
 from time import strftime
+import os.path
 
-
+"""
 def do_pack():
 
     ''' Method archives files and returns path of archive '''
@@ -20,18 +21,42 @@ def do_pack():
         return ('versions/web_static.{}'.format(time_created))
     else:
         return None
-
+"""
 
 def do_deploy(archive_path):
 
     '''Method deploys an archive to a web server
     and uncomporesses it to a folder '''
 
-    archive_path = 'versions/web_static.{}.tgz'
-
-    if archive_path is None:
+    if os.path.isfile(archive_path) is False:
         return False
 
-    env.hosts = ['66.70.184.164']
+    env.hosts = ['66.70.184.164', '142.44.164.121']
 
-    upload = put(archive_path, hosts)
+    try:
+        ''' Unpacks compressed file / Uploads file to /tmp directory        of web server '''
+
+        upload = put(archive_path, '/tmp/')
+        unpack = archive_path.split('/')[-1]
+        folder = ("/data/web_static/releases/" + unpack.split('.')[0])
+
+        run("sudo mkdir -p {:s}".format(folder))
+
+        ''' Uncompress <archive filename without extension> to created f    older - /data/web_static/releases/ on the web server '''
+
+        run("sudo tar -xzf /tmp/{:s} -C {:s}".format(unpack, folder))
+
+        ''' Deletes the archive from the web server '''
+        run("sudo rm /tmp/{:s}".format(unpack))
+        run("sudo mv {:s}/web_static/* {:s}/".format(folder, folder))
+        run("sudo rm -rf {:s}/web_static".format(folder))
+
+        ''' Delete the symbolic link /data/web_static/current '''
+        run('sudo rm -rf /data/web_static/current')
+
+        ''' Create a new the symbolic link /data/web_static/current on the web server, linked to the new version of your code (/data/web_stati        c/releases/<archive filename without extension>) ''' 
+
+        run("sudo ln -s {:s} /data/web_static/current".format(folder))
+        return True
+    except:
+        return False
