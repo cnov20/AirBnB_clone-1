@@ -23,6 +23,7 @@ def do_pack():
         return None
 """
 
+
 def do_deploy(archive_path):
 
     '''Method deploys an archive to a web server
@@ -34,7 +35,8 @@ def do_deploy(archive_path):
     env.hosts = ['66.70.184.164', '142.44.164.121']
 
     try:
-        ''' Unpacks compressed file / Uploads file to /tmp directory        of web server '''
+        ''' Unpacks compressed file / Uploads file to /tmp directory
+        of web server '''
 
         upload = put(archive_path, '/tmp/')
         unpack = archive_path.split('/')[-1]
@@ -42,7 +44,8 @@ def do_deploy(archive_path):
 
         run("sudo mkdir -p {:s}".format(folder))
 
-        ''' Uncompress <archive filename without extension> to created f    older - /data/web_static/releases/ on the web server '''
+        ''' Uncompress <archive filename without extension> to created
+        folder - /data/web_static/releases/ on the web server '''
 
         run("sudo tar -xzf /tmp/{:s} -C {:s}".format(unpack, folder))
 
@@ -54,7 +57,9 @@ def do_deploy(archive_path):
         ''' Delete the symbolic link /data/web_static/current '''
         run('sudo rm -rf /data/web_static/current')
 
-        ''' Create a new the symbolic link /data/web_static/current on the web server, linked to the new version of your code (/data/web_stati        c/releases/<archive filename without extension>) ''' 
+        ''' Create a new the symbolic link /data/web_static/current on the web
+        server, linked to the new version of your code
+        (/data/web_static/releases/<archive filename without extension>) '''
 
         run("sudo ln -s {:s} /data/web_static/current".format(folder))
         return True
