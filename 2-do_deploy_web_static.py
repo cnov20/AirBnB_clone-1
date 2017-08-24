@@ -28,7 +28,7 @@ def do_deploy(archive_path):
     '''Method deploys an archive to a web server
     and uncomporesses it to a folder '''
 
-    if os.path.isfile(archive_path) is False:
+    if (os.path.isfile(archive_path)) is False:
         return False
 
     env.hosts = ['66.70.184.164', '142.44.164.121']
