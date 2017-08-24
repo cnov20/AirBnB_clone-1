@@ -8,6 +8,7 @@ from datetime import datetime
 from time import strftime
 env.hosts = ['66.70.184.164', '142.44.164.121']
 
+
 def do_pack():
     ''' Method archives files and returns path of archive '''
     time_created = datetime.utcnow().strftime("%Y%m%d%H%M%S")
