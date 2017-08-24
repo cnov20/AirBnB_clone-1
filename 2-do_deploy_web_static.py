@@ -4,6 +4,8 @@
 
 from fabric.api import *
 import os.path
+env.hosts = ['66.70.184.164', '142.44.164.121']
+
 
 def do_deploy(archive_path):
 
@@ -12,8 +14,6 @@ def do_deploy(archive_path):
 
     if (os.path.isfile(archive_path) is False):
         return False
-
-    env.hosts = ['66.70.184.164', '142.44.164.121']
 
     try:
         ''' Unpacks compressed file / Uploads file to /tmp directory
