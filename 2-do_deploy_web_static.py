@@ -19,7 +19,7 @@ def do_deploy(archive_path):
         ''' Unpacks compressed file / Uploads file to /tmp directory
         of web server '''
 
-        upload = put(archive_path, "/tmp/")
+        put(archive_path, "/tmp/")
         unpack = archive_path.split("/")[-1]
         folder = ("/data/web_static/releases/" + unpack.split(".")[0])
 
