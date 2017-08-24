@@ -4,7 +4,21 @@
 
 from fabric.api import *
 import os.path
+from datetime import datetime
+from time import strftime
 env.hosts = ['66.70.184.164', '142.44.164.121']
+
+def do_pack():
+    ''' Method archives files and returns path of archive '''
+    time_created = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    directory_created = local('mkdir -p versions')
+    archive = local('tar -cvzf versions/web_static_{}.tgz web_static'
+                    .format(time_created))
+
+    if archive is not None:
+        return ('versions/web_static.{}'.format(time_created))
+    else:
+        return None
 
 
 def do_deploy(archive_path):
@@ -54,7 +68,7 @@ def deploy():
         using the function deploy '''
 
         new_archive_path = do_pack()
-        if archive_path is None:
+        if new_archive_path is None:
             return False
         deployed = do_deploy(new_archive_path)
         return deployed
