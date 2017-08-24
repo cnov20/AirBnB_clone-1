@@ -65,11 +65,12 @@ def do_deploy(archive_path):
 
 def deploy():
 
-        ''' Method that creates and distributes an archive to your web servers,
-        using the function deploy '''
+    ''' Method that creates and distributes an archive to your web servers,
+    using the function deploy '''
 
+    try:
         new_archive_path = do_pack()
-        if new_archive_path is None:
-            return False
         deployed = do_deploy(new_archive_path)
         return deployed
+    except:
+        return False
