@@ -13,26 +13,32 @@ from flask import Flask, url_for, render_template
 app = Flask(__name__)
 app.strict_slashes = False
 
+
 @app.route('/')
 def hello():
     return 'Hello HBNB!'
+
 
 @app.route('/hbnb')
 def hbnb():
     return 'HBNB'
 
+
 @app.route('/c/<text>')
 def c(text):
     return 'C ' + text
 
+
 @app.route('/python/')
 @app.route('/python/<text>')
 def python(text='is cool'):
-     return 'Python ' + text.replace('_', ' ')
+    return 'Python ' + text.replace('_', ' ')
+
 
 @app.route('/number/<int:n>')
 def number(n):
     return str(n) + ' is a number'
+
 
 @app.route('/number_template/<int:n>')
 def number_template(n):
