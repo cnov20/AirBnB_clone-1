@@ -50,9 +50,12 @@ def number_template(n):
 def number_odd_or_even(n):
     return render_template('6-number_odd_or_even.html', n=n)
 
-@app.route('/states_list/')
-def states_list(states):
-    return render_template('7-states_list.html', states=storage.all("State").values())
+
+@app.route('/states_list')
+def states_list(states=None):
+    return render_template('7-states_list.html',
+                           states=storage.all("State").values())
+
 
 @app.teardown_appcontext
 def teardown_db(self):
