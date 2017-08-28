@@ -47,28 +47,24 @@ class DBStorage:
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None):
-
-        models_available = ["User", "State", "City", "Amenity", "Place", "Review"]
 
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
 
+    def all(self, cls=None):
+
+        ''' models_available = ["User", "State", "City", "Amenity", "Place", "Review"] '''
+
         obj_orm = {}
-
         if cls is None:
-
-            for model in models_available:
-                print (model)
-                for query in self.__session.query(eval(model)):
+            for key, val in self.CNC.items():
+                for query in self.__session.query(val):
                     obj_orm[query.id] = query
-            print("hey")
 
         else:
-            for query in self.__session.query(eval(cls)):
+            for query in self.__session.query(self.CNC[cls]):
                 obj_orm[query.id] = query
 
-        print(type(cls))
         return obj_orm
 
     def new(self, obj):
@@ -80,10 +76,14 @@ class DBStorage:
         self.__session.commit()
 
     def delete(self, obj=None):
-        if obj:
-            self.__session.remove()
+        if obj is not None:
+            self.__session.delete(obj)
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine)
+        '''        Session = sessionmaker(bind=self.__engine) '''
         self.__sesssion = scoped_session(sessionmaker(bind=self.__engine))
+
+    def close(self):
+        self.__session = scoped_session(sessionmaker(bind=self.__engine))
+        self.__session.remove()

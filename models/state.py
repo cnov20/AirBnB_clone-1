@@ -19,6 +19,10 @@ class State(BaseModel, Base):
     else:
         name = ''
 
+        def cities(self):
+            cities = relationship("City", backref='state', cascade="delete, delete-orphan")
+            return cities
+
     def __init__(self, *args, **kwargs):
         """instantiates a new state"""
         super().__init__(self, *args, **kwargs)
