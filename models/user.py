@@ -6,7 +6,7 @@ User Class from Models Module
 from models.base_model import BaseModel, Base, Column, String, getenv
 from sqlalchemy.orm import relationship
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """User class handles all application users"""
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
@@ -17,16 +17,16 @@ class User(BaseModel):
         first_name = Column(String(128), nullable=False)
         last_name = Column(String(128), nullable=False)
         places = relationship('Place',
-                              back_populates='user',
-                              cascade='delete')
+                              cascade='delete',
+                              backref='user')
         reviews = relationship('Review',
-                               back_populates='user',
-                               cascade='delete')
-
-    email = ''
-    password = ''
-    first_name = ''
-    last_name = ''
+                               cascade='delete',
+                               backref='user')
+    else:
+        email = ''
+        password = ''
+        first_name = ''
+        last_name = ''
 
     def __init__(self, *args, **kwargs):
         """instantiates a new user"""

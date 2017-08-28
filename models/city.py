@@ -9,14 +9,16 @@ from sqlalchemy import ForeignKey
 from os import getenv
 
 
-class City(BaseModel):
+class City(BaseModel, Base):
+
     """City class handles all application cities"""
+
     if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = "cities"
         name = Column(String(128), nullable=False)
         state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
-        places = relationship("Place", backref="city", cascade="all, delete, delete-orphan")
-        __mapper_args = {"confirm_deleted_rows": False}
+        places = relationship("Place", backref="city", cascade="all, delete-orphan")
+        '''        __mapper_args = {"confirm_deleted_rows": False} '''
     else:
         name = ''
         state_id = ''

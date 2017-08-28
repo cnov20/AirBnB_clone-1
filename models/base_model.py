@@ -16,6 +16,11 @@ now = datetime.now
 strptime = datetime.strptime
 Base = declarative_base()
 
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    Base = declarative_base()
+else:
+    Base = object
+
 class BaseModel:
     """attributes and functions for BaseModel class"""
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
@@ -27,6 +32,8 @@ class BaseModel:
         """instantiation and instance attributes of new BaseModel Class"""
         if kwargs:
             self.__set_attributes(kwargs)
+            for key, value in kwargs.items():
+                setattr(self, key, value)
         else:
             self.id = str(uuid4())
             self.created_at = now()

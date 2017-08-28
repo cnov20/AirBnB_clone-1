@@ -9,7 +9,6 @@ BaseModel = base_model.BaseModel
 User = user.User
 FS = storage
 
-
 class HBNBCommand(cmd.Cmd):
     """Command inerpreter class"""
     prompt = '(hbnb) '
@@ -97,7 +96,6 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-
     def dict_create(self, d, arg):
         """ Builds a dictionary from arguments passed by converting
             them to key value pairs
@@ -146,6 +144,7 @@ class HBNBCommand(cmd.Cmd):
 
         my_obj.__dict__.update(new_dict)
         my_obj.save()
+        '''        BaseModel(**my_obj.__dict__) '''
         print(my_obj.id)
 
     def do_show(self, arg):

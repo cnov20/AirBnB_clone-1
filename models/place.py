@@ -10,15 +10,20 @@ from sqlalchemy.orm import relationship, backref
 
 
 class PlaceAmenity(Base):
-    __tablename__ = 'place_amenity'
-    metadata = Base.metadata
-    place_id = Column(String(60), ForeignKey('places.id'), primary_key=True, nullable=False)
-    amenity_id = Column(String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False)
 
-class Place(BaseModel):
-    """Place class handles all application places"""
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__="places"
+        __tablename__ = 'place_amenity'
+        metadata = Base.metadata
+        place_id = Column(String(60), ForeignKey('places.id'), primary_key=True,
+                          nullable=False)
+        amenity_id = Column(String(60), ForeignKey('amenities.id'), primary_key=True,
+                            nullable=False)
+
+class Place(BaseModel, Base):
+    """Place class handles all application places"""
+
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        __tablename__ = "places"
 
         city_id = Column(String(60),
                      ForeignKey("cities.id"),
