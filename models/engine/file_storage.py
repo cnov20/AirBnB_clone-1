@@ -9,6 +9,7 @@ from datetime import datetime
 strptime = datetime.strptime
 to_json = base_model.BaseModel.to_json
 
+
 class FileStorage:
     """handles long term storage of all class instances"""
     CNC = {

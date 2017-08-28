@@ -15,9 +15,10 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+
 class DBStorage:
 
-    __engine =  None
+    __engine = None
     __session = None
 
     """handles long term storage of all class instances"""
@@ -47,13 +48,13 @@ class DBStorage:
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
-
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
 
     def all(self, cls=None):
 
-        ''' models_available = ["User", "State", "City", "Amenity", "Place", "Review"] '''
+        ''' models_available = ["User", "State", "City", "Amenity",
+        "Place", "Review"] '''
 
         obj_orm = {}
         if cls is None:
