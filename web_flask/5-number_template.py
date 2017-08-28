@@ -26,7 +26,7 @@ def hbnb():
 
 @app.route('/c/<text>')
 def c(text):
-    return 'C ' + text
+    return 'C ' + text.replace('_', ' ')
 
 
 @app.route('/python/')
